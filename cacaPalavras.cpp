@@ -120,6 +120,11 @@ int main()
     {
         cout << "Digite a palavra que deseja encontrar: ";
         cin >> palavraRecebe[i];
+        int tam = strlen(palavraRecebe[i]);
+        if(tam<4){
+            cout << "Palavra deve conter no mínimo 4 caracteres!\n";
+            i--;
+        }
     }
 
     cout << "Matriz de caracters:\n";
