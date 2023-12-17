@@ -5,40 +5,56 @@
 
 using namespace std;
 
-void matrizCaractere(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int l, int c, int qtdJogadas)
-{
-    char palavra[LINHAS][COLUNAS];
-
-    for (int i = 0; i < qtdJogadas; i++)
+void converteCaracteres(char mat[][COLUNAS], int linha, int coluna){
+    for (int i = 0; i < linha; i++)
     {
-        int tamanho = strlen(palavraRecebe[i]);
-
-        // Modifica palavras da entrada para apenas letras minúsculas
-        for (int j = 0; j < tamanho; j++)
+        for (int j = 0; j < coluna; j++)
         {
-            if (palavraRecebe[i][j] >= 'A' && palavraRecebe[i][j] <= 'Z')
+            if (mat[i][j] >= 'A' && mat[i][j] <= 'Z')
             {
-                palavra[i][j] = palavraRecebe[i][j] + ('a' - 'A');
+                mat[i][j] = mat[i][j] + ('a' - 'A');
             }
             else
             {
-                palavra[i][j] = palavraRecebe[i][j];
+                mat[i][j] = mat[i][j];
             }
         }
+    }
+}
 
+void convertePalavra (char palavraRecebe[][COLUNAS], int qtdJogadas){
+    for (int i=0; i< qtdJogadas; i++){
+        int tamanho = strlen(palavraRecebe[i]);
+        for (int j=0; j<tamanho; j++){
+            if (palavraRecebe[i][j] >= 'A' && palavraRecebe[i][j] <= 'Z')
+            {
+                palavraRecebe[i][j] = palavraRecebe[i][j] + ('a' - 'A');
+            }
+            else
+            {
+                palavraRecebe[i][j] = palavraRecebe[i][j];
+            }
+        }
+    }
+}
+
+void testaPosicoes(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int lin, int col, int qtdJogadas)
+{
+    for (int i = 0; i < qtdJogadas; i++)
+    {
         bool encontrou = false;
-
-        for (int linha = 0; linha < l; linha++)
+        for (int linha = 0; linha < lin; linha++)
         {
-            for (int coluna = 0; coluna < c; coluna++)
+            int tamanho = strlen(palavraRecebe[i]);
+            for (int coluna = 0; coluna < col; coluna++)
             {
                 // Verifica Horizontal
-                if (coluna + tamanho <= c)
+                if (coluna + tamanho <= col)
                 {
                     encontrou = true;
                     for (int j = 0; j < tamanho; j++)
                     {
-                        if (mat[linha][coluna + j] != palavra[i][j])
+                        if (mat[linha][coluna + j] != palavraRecebe[i][j])
                         {
                             encontrou = false;
                             break;
@@ -52,12 +68,12 @@ void matrizCaractere(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int l, 
                 }
 
                 // Verifica Vertical
-                if (linha + tamanho <= l)
+                if (linha + tamanho <= lin)
                 {
                     encontrou = true;
                     for (int j = 0; j < tamanho; j++)
                     {
-                        if (mat[linha + j][coluna] != palavra[i][j])
+                        if (mat[linha + j][coluna] != palavraRecebe[i][j])
                         {
                             encontrou = false;
                             break;
@@ -71,12 +87,12 @@ void matrizCaractere(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int l, 
                 }
 
                 // Verifica Diagonal
-                if (linha + tamanho <= l && coluna + tamanho <= c)
+                if (linha + tamanho <= lin && coluna + tamanho <= col)
                 {
                     encontrou = true;
                     for (int j = 0; j < tamanho; j++)
                     {
-                        if (mat[linha + j][coluna + j] != palavra[i][j])
+                        if (mat[linha + j][coluna + j] != palavraRecebe[i][j])
                         {
                             encontrou = false;
                             break;
@@ -96,7 +112,7 @@ void matrizCaractere(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int l, 
         }
         if (!encontrou)
         {
-            cout << "A palavra ''" << palavra[i] << "'' nao foi encontrada!\n";
+            cout << "A palavra ''" << palavraRecebe[i] << "'' nao foi encontrada!\n";
         }
     }
 }
@@ -107,13 +123,12 @@ int main()
 
     cout << "Digite a quantidade de palavras que deseja encontrar:";
     cin >> qtdJogadas;
-    cout << "Digite as dimençoes da matriz:\n";
+    cout << "Digite as dimensoes da matriz:\n";
     cin >> lin;
     cout << " X \n";
     cin >> col;
 
     char matrizRecebe[LINHAS][COLUNAS];
-    char matriz[LINHAS][COLUNAS];
     char palavraRecebe[LINHAS][COLUNAS];
 
     for (int i = 0; i < qtdJogadas; i++)
@@ -127,7 +142,7 @@ int main()
         }
     }
 
-    cout << "Matriz de caracters:\n";
+    cout << "Matriz de caracteres:\n";
     for (int i = 0; i < lin; i++)
     {
         for (int j = 0; j < col; j++)
@@ -135,24 +150,9 @@ int main()
             cin >> matrizRecebe[i][j];
         }
     }
-
-    // Modifica matriz para apenas letras minúsculas
-    for (int i = 0; i < lin; i++)
-    {
-        for (int j = 0; j < col; j++)
-        {
-            if (matrizRecebe[i][j] >= 'A' && matrizRecebe[i][j] <= 'Z')
-            {
-                matriz[i][j] = matrizRecebe[i][j] + ('a' - 'A');
-            }
-            else
-            {
-                matriz[i][j] = matrizRecebe[i][j];
-            }
-        }
-    }
-
-    matrizCaractere(matriz, palavraRecebe, lin, col, qtdJogadas);
+    converteCaracteres (matrizRecebe, lin, col);
+    convertePalavra (palavraRecebe,qtdJogadas);
+    testaPosicoes(matrizRecebe, palavraRecebe, lin, col, qtdJogadas);
 
     return 0;
 }
