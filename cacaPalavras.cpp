@@ -5,6 +5,7 @@
 
 using namespace std;
 
+//Feito por Bruno
 void converteCaracteres(char mat[][COLUNAS], int linha, int coluna){
     // Converte todos os caracteres da matriz para minusculo
     for (int i = 0; i < linha; i++)
@@ -23,6 +24,7 @@ void converteCaracteres(char mat[][COLUNAS], int linha, int coluna){
     }
 }
 
+//Feito por Bruno
 void convertePalavra (char palavraRecebe[][COLUNAS], int qtdJogadas){
     // Converte todos os caracteres das palavras para minúsculo
     for (int i=0; i< qtdJogadas; i++){
@@ -40,6 +42,7 @@ void convertePalavra (char palavraRecebe[][COLUNAS], int qtdJogadas){
     }
 }
 
+//Feito por José
 void testaPosicoes(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int lin, int col, int qtdJogadas)
 {
     //Testa a posição de cada palavra da matriz de palavras
@@ -122,6 +125,7 @@ void testaPosicoes(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int lin, 
     }
 }
 
+//Feito por Bruno e José
 int main()
 {
     int qtdJogadas, lin, col;
@@ -161,3 +165,5 @@ int main()
 
     return 0;
 }
+
+//Bruno Cesario Menezes - 202335003; José Simões de Araújo Neto - 202335035
