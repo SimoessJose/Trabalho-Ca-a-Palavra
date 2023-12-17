@@ -6,6 +6,7 @@
 using namespace std;
 
 void converteCaracteres(char mat[][COLUNAS], int linha, int coluna){
+    // Converte todos os caracteres da matriz para minusculo
     for (int i = 0; i < linha; i++)
     {
         for (int j = 0; j < coluna; j++)
@@ -23,6 +24,7 @@ void converteCaracteres(char mat[][COLUNAS], int linha, int coluna){
 }
 
 void convertePalavra (char palavraRecebe[][COLUNAS], int qtdJogadas){
+    // Converte todos os caracteres das palavras para minúsculo
     for (int i=0; i< qtdJogadas; i++){
         int tamanho = strlen(palavraRecebe[i]);
         for (int j=0; j<tamanho; j++){
@@ -40,6 +42,7 @@ void convertePalavra (char palavraRecebe[][COLUNAS], int qtdJogadas){
 
 void testaPosicoes(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int lin, int col, int qtdJogadas)
 {
+    //Testa a posição de cada palavra da matriz de palavras
     for (int i = 0; i < qtdJogadas; i++)
     {
         bool encontrou = false;
@@ -48,7 +51,7 @@ void testaPosicoes(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int lin, 
             int tamanho = strlen(palavraRecebe[i]);
             for (int coluna = 0; coluna < col; coluna++)
             {
-                // Verifica Horizontal
+                // Verifica se a palavra está na horizontal
                 if (coluna + tamanho <= col)
                 {
                     encontrou = true;
@@ -67,7 +70,7 @@ void testaPosicoes(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int lin, 
                     }
                 }
 
-                // Verifica Vertical
+                // Verifica se a palavra está na vertical
                 if (linha + tamanho <= lin)
                 {
                     encontrou = true;
@@ -86,7 +89,7 @@ void testaPosicoes(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int lin, 
                     }
                 }
 
-                // Verifica Diagonal
+                // Verifica se a palavra está na diagonal
                 if (linha + tamanho <= lin && coluna + tamanho <= col)
                 {
                     encontrou = true;
@@ -105,11 +108,13 @@ void testaPosicoes(char mat[][COLUNAS], char palavraRecebe[][COLUNAS], int lin, 
                     }
                 }
             }
+            //Código passa para próxima verificação caso encontre a posição
             if (encontrou)
             {
                 break;
             }
         }
+        //Código imprime qual palavra da matriz de palavras não foi encontrada
         if (!encontrou)
         {
             cout << "A palavra ''" << palavraRecebe[i] << "'' nao foi encontrada!\n";
